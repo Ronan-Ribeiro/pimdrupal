@@ -19,7 +19,12 @@
         "drupal/admin_toolbar": "^3.4",
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/core-recommended": "^10.1",
-        "drupal/gin": "^3.0@RC"
+        "drupal/module_filter": "^4.0",
+        "drush/drush": "^12.1"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "drupal/devel": "^5.1"
     },
     "conflict": {
         "drupal/drupal": "*"
