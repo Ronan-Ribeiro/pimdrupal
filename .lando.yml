@@ -4,7 +4,7 @@ config:
   via: nginx
   webroot: web
   php: 8.2
-  database: mariadb:10.6
+  database: mariadb
 
 services:
   appserver_pimcore:
@@ -17,7 +17,7 @@ services:
       - apt-get update -y
       - apt-get install -y locales-all
   database_pimcore:
-    type: mariadb:10.6
+    type: mariadb
     config:
       database: .lando-config/my-pimcore.cnf
     creds:
@@ -41,7 +41,7 @@ tooling:
     service: appserver
     cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice"
     options:
-    description: Run phpcs for given folder or file.
+    description: "Run phpcs for given folder or file."
   pimcore-install:
     service: appserver_pimcore
     cmd: "cd /app/pimcore/vendor/bin/ && ./pimcore-install \
@@ -49,4 +49,4 @@ tooling:
       --mysql-username=pimcore_db --mysql-password=pimcore_db --mysql-database=pimcore_db \
       --mysql-host-socket=database_pimcore --mysql-port=3306 \
       --no-interaction"
-    description: Run pimcore-install script.
+    description: "Run pimcore-install script. Drop/Create app database and define admin user credentials (User: admin, Pass: 1234)."
