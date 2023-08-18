@@ -1,0 +1,10 @@
+
+# Ignore dependencies that are managed with Composer.
+vendor
+
+# PhpStorm / IDEA
+.idea
+# NetBeans
+nbproject
+#VSCode
+.vscode
