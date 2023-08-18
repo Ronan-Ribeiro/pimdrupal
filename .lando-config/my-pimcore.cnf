@@ -1,0 +1,10 @@
+[mysqld]
+innodb_file_per_table = 1
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init-connect='SET NAMES utf8mb4'
+init_connect='SET collation_connection = utf8mb4_unicode_ci'
+
+[mariadb]
+plugin_load_add = ha_archive # optional but recommended, starting from mariadb 10.1 archive format is no more activated by default (check and adapt for mysql or other database software)
+
