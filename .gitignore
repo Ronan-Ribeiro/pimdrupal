@@ -8,3 +8,48 @@ vendor
 nbproject
 #VSCode
 .vscode
+
+# remove the following ignores for your project
+/pimcore/config/pimcore/constants.php
+
+# symfony default
+/pimcore/.web-server-pid
+/pimcore/config/pimcore/parameters.yml
+/pimcore/build/
+/pimcore/phpunit.xml
+/pimcore/public/bundles/
+
+# local config
+/pimcore/.env.local
+/pimcore/.env.local.php
+/pimcore/.env.*.local
+!/pimcore/config/local
+/pimcore/config/local/*
+!/pimcore/config/local/.gitkeep
+
+/pimcore/var/*
+!/pimcore/var/.gitkeep
+!/pimcore/var/classes/
+/pimcore/var/classes/DataObject
+
+!/pimcore/var/config
+/pimcore/var/config/system.yml
+/pimcore/var/config/maintenance.php
+
+# project specific recommendations
+/pimcore/var/config/tag-manager.php
+/pimcore/var/config/reports.php
+
+
+/pimcore/public/var/
+/pimcore/public/sitemap*.xml
+
+# PHP-CS-Fixer
+/pimcore/.php-cs-fixer.php
+/pimcore/.php-cs-fixer.cache
+
+# composer
+/pimcore/vendor/
+
+# temp
+/pimcore/.temp
