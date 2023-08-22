@@ -40,7 +40,6 @@ nbproject
 /pimcore/var/config/tag-manager.php
 /pimcore/var/config/reports.php
 
-
 /pimcore/public/var/
 /pimcore/public/sitemap*.xml
 
@@ -53,3 +52,5 @@ nbproject
 
 # temp
 /pimcore/.temp
+
+/pimcore/dump/*.sql
