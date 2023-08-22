@@ -28,12 +28,11 @@ if (file_exists($a = getcwd() . '/vendor/autoload_runtime.php')) {
     throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
 }
 
-define('PIMCORE_CONSOLE', true);
-
 Bootstrap::setProjectRoot();
 
-return function (array $context) {
-    $kernel = Bootstrap::startupCli();
+define('PIMCORE_CONSOLE', true);
 
+return function (array $context) {
+    $kernel = \Pimcore\Bootstrap::startupCli();
     return new Application($kernel);
 };

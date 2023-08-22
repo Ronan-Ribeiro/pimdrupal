@@ -5,6 +5,13 @@ security:
         pimcore_admin:
             id: Pimcore\Security\User\UserProvider
 
+
+        # we use a custom user provider which loads users from the Customer class
+        # the user provider is provided by the CMF
+        cmf_customer_provider:
+            id: cmf.security.user_provider
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -18,6 +25,46 @@ security:
 
         # Pimcore Admin Bundle firewall
         pimcore_admin: '%pimcore_admin_bundle.firewall_settings%'
+
+        # Pimcore CMF bundle firewall
+        cmf_webservice: '%customer_management_framework.firewall_settings%'
+
+        # demo_frontend firewall is valid for the whole site
+        demo_frontend:
+
+            # -----------------------------------------------------
+            #   SAMPLE SIMPLE FIREWALL CONFIG FOR HTTP-BASIC AUTH
+            # -----------------------------------------------------
+            # the provider defined above
+            # provider: cmf_customer_provider
+            # http_basic: ~
+
+            # -----------------------------------------------------
+            #   SAMPLE FIREWALL CONFIG FOR FORM-AUTH
+            # -----------------------------------------------------
+
+            # the provider defined above
+
+            provider: cmf_customer_provider
+            
+            entry_point: form_login
+
+            form_login:
+                enable_csrf: true
+                login_path: 'account-login'
+                check_path: 'account-login'
+                default_target_path: 'account-index'
+
+
+            logout:
+                path: 'account-logout'
+                target: /
+
+                # optional: to keep logins of other firewalls (like admin)
+                invalidate_session: false
+
+            remember_me:
+                secret: '%kernel.secret%'
 
     access_control:
         # Pimcore admin ACl  // DO NOT CHANGE!

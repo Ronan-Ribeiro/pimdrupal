@@ -1,6 +1,8 @@
 imports:
     - { resource: 'local/' }
-
+    - { resource: ecommerce/base-ecommerce.yaml }
+    - { resource: cmf.yaml }
+    - { resource: workflows.yaml }
 
 pimcore:
 
@@ -12,6 +14,47 @@ pimcore:
 # or even more specific:
 # ./bin/console debug:config pimcore assets.image
 
+    security:
+        # the encoder factory as shipped by the CMF
+        password_hasher_factories:
+            Pimcore\Model\DataObject\Customer: cmf.security.user_password_hasher_factory
+
+    chromium:
+        uri: 'ws://chrome:3000/'
+
+    gotenberg:
+        base_url: 'http://gotenberg:3000'
+
+    config_location:
+        image_thumbnails:
+            write_target:
+                type: 'settings-store'
+        video_thumbnails:
+            write_target:
+                type: 'settings-store'
+        document_types:
+            write_target:
+                type: 'settings-store'
+        predefined_properties:
+            write_target:
+                type: 'settings-store'
+        predefined_asset_metadata:
+            write_target:
+                type: 'settings-store'
+        perspectives:
+            write_target:
+                type: 'settings-store'
+        custom_views:
+            write_target:
+                type: 'settings-store'
+        object_custom_layouts:
+            write_target:
+                type: 'settings-store'
+        system_settings:
+            write_target:
+                type: 'settings-store'
+            read_target:
+                type: 'settings-store'
 
 #### TRANSLATIONS
 #    translations:
@@ -20,7 +63,6 @@ pimcore:
 #### FEATURE FLAGS
 #    flags:
 #        zend_date: true
-
 #### CLASS OVERRIDES EXAMPLES
 #    models:
 #        class_overrides:
@@ -64,13 +106,11 @@ pimcore:
 #            thumbnails:
 #                webp_auto_support: false
 
-
 #### SYSTEM SETTINGS
 
 #    general:
 #        timezone: Europe/Berlin
 #        path_variable: ''
-#        instance_identifier: ''
 #    full_page_cache:
 #        enabled: false
 #        lifetime: null
@@ -98,12 +138,22 @@ pimcore:
 #        archive_treshold: '30'
 #        archive_alternative_database: ''
 
+#### Pimcore ADMIN
+pimcore_admin:
+    admin_csp_header:
+        enabled: true
+        exclude_paths:
+            - '@^/admin/external_opcache@'
+
+    config_location:
+        admin_system_settings:
+            write_target:
+                type: 'settings-store'
+            read_target:
+                type: 'settings-store'
+
 #### SYMFONY OVERRIDES
 framework:
-
-#### DEFINE LOCATION OF MANIFEST WHEN WORKING WITH SYMFONY ENCORE
-#    assets:
-#        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
 
 #### USE CUSTOM CACHE POOL
 #    cache:
@@ -134,3 +184,48 @@ framework:
 #         name: ''
 #         email: ''
 
+pimcore_seo:
+    sitemaps:
+        generators:
+            app_news:
+                enabled: true
+                priority: 50
+                generator_id: App\Sitemaps\NewsGenerator
+            app_cars:
+                enabled: true
+                priority: 49
+                generator_id: App\Sitemaps\ProductGenerator
+            app_category:
+                enabled: true
+                priority: 48
+                generator_id: App\Sitemaps\CategoryGenerator
+            # Pimcore ships a default document tree generator which is enabled by default
+            # but you can easily disable it here.
+            pimcore_documents:
+                enabled: true
+    redirects:
+        auto_create_redirects: true
+
+pimcore_web_to_print:
+    config_location:
+        web_to_print:
+            write_target:
+                type: 'settings-store'
+
+pimcore_static_routes:
+    config_location:
+        staticroutes:
+            write_target:
+                type: 'settings-store'
+
+pimcore_custom_reports:
+    config_location:
+        custom_reports:
+            write_target:
+                type: 'settings-store'
+
+pimcore_data_hub:
+    config_location:
+        data_hub:
+            write_target:
+                type: 'settings-store'

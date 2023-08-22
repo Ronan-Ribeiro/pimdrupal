@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Pimcore
  *
@@ -18,6 +17,7 @@ namespace App;
 use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
 use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Pimcore\Kernel as PimcoreKernel;
+use Presta\SitemapBundle\PrestaSitemapBundle;
 
 class Kernel extends PimcoreKernel
 {
@@ -29,6 +29,10 @@ class Kernel extends PimcoreKernel
      */
     public function registerBundlesToCollection(BundleCollection $collection): void
     {
+        // pimcore bundles
         $collection->addBundle(new PimcoreAdminBundle(), 60);
+
+        // activate Presta\Sitemap Bundle for sitemaps generation
+        $collection->addBundle(PrestaSitemapBundle::class);
     }
 }
