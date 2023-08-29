@@ -16,6 +16,8 @@ services:
     build_as_root:
       - apt-get update -y
       - apt-get install -y locales-all
+      - docker-php-ext-install sockets
+      - docker-php-ext-enable sockets
   database_pimcore:
     type: mariadb
     config:
@@ -39,9 +41,13 @@ proxy:
 tooling:
   phpcs:
     service: appserver
-    cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice"
+    cmd: "/app/vendor/bin/phpcs --ignore=*/pimcore/* --standard=Drupal,DrupalPractice"
     options:
     description: "Run phpcs for given folder or file."
+  pim-console:
+    service: appserver_pimcore
+    cmd: "cd /app/pimcore/bin/ && php console"
+    description: "Run bin/console commands."
   pimcore-install:
     service: appserver_pimcore
     cmd: "cd /app/pimcore/vendor/bin/ && ./pimcore-install \
