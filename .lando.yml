@@ -46,8 +46,8 @@ tooling:
     description: "Run phpcs for given folder or file."
   pim-console:
     service: appserver_pimcore
-    cmd: "cd /app/pimcore/bin/ && php console"
-    description: "Run bin/console commands."
+    cmd: "bash /app/.tooling/lando_pim-console.sh"
+    description: "Run bin/console commands (Commands with parameters need to be executed in quotes)."
   pimcore-install:
     service: appserver_pimcore
     cmd: "cd /app/pimcore/vendor/bin/ && ./pimcore-install \
