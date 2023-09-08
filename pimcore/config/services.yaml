@@ -59,7 +59,9 @@ services:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
-
+    App\EventListener\AssetFoldersListener:
+        tags:
+             - { name: kernel.event_listener, event: pimcore.datahub.graphql.query.preBuild, method: onPreBuild }
 
     # Example custom templating helper
     # App\Templating\Helper\Example:
